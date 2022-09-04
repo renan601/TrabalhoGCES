@@ -1,0 +1,16 @@
+FROM ubuntu:20.04
+
+# Install dependencies
+RUN apt-get update && apt-get install -y gnupg2 && \
+    apt-get install -y curl && \
+    apt-get install -y software-properties-common && \
+    apt-get install -y python3-pip libpq-dev python3-dev
+
+# Copy project backend folder to container 
+COPY library_back /home/library_back/
+
+# Change work directory
+WORKDIR "/home/library_back/"
+
+# Install requirements
+RUN pip3 install -r requirements.txt
